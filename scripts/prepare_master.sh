@@ -7,20 +7,20 @@ sed -i -e 's/#inventory/inventory/g' /etc/ansible/ansible.cfg
 
 echo "[all]" > /etc/ansible/hosts
 echo "sanboxmaster" >> /etc/ansible/hosts
-echo "ansibleagentone" >> /etc/ansible/hosts
-echo "ansibleagenttwo" >> /etc/ansible/hosts
+echo "sandboxagentone" >> /etc/ansible/hosts
+echo "sandboxagenttwo" >> /etc/ansible/hosts
 echo "" >> /etc/ansible/hosts
 echo "[agents]" >> /etc/ansible/hosts
-echo "ansibleagentone" >> /etc/ansible/hosts
-echo "ansibleagenttwo" >> /etc/ansible/hosts
+echo "sandboxagentone" >> /etc/ansible/hosts
+echo "sandboxagenttwo" >> /etc/ansible/hosts
 echo "" >> /etc/ansible/hosts
 echo "[master]" >> /etc/ansible/hosts
 echo "sanboxmaster" >> /etc/ansible/hosts
 
 
 echo "192.168.0.190 sandboxmaster" >> /etc/hosts
-echo "192.168.0.191 ansibleagentone" >> /etc/hosts
-echo "192.168.0.192 ansibleagenttwo" >> /etc/hosts
+echo "192.168.0.191 sandboxagentone" >> /etc/hosts
+echo "192.168.0.192 sandboxagenttwo" >> /etc/hosts
 
 
 
