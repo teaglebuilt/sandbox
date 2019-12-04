@@ -18,7 +18,8 @@ Vagrant.configure("2") do |config|
       vb.memory = 1024
       vb.name = "SandboxMaster"
     end
-    config.vm.network "public_network"
+    master.vm.provision "last", type: "shell", path: "prepare_master.sh"
+    master.vm.network "public_network", ip: "192.168.0.190"
   end
 
   config.vm.define "ansibleagentone" do |agent|
@@ -29,7 +30,7 @@ Vagrant.configure("2") do |config|
       vb.cpus = 1
       vb.memory = 1024
     end    
-    config.vm.network "public_network"
+    agent.vm.network "public_network", ip: "192.168.0.191"
   end
 
   config.vm.define "ansibleagenttwo" do |agent|
@@ -40,7 +41,7 @@ Vagrant.configure("2") do |config|
       vb.cpus = 1
       vb.memory = 1024
     end    
-    config.vm.network "public_network"
+    agent.vm.network "public_network", ip: "192.168.0.192"
   end
 
 end
