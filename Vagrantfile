@@ -16,9 +16,11 @@ Vagrant.configure("2") do |config|
     master.vm.provider "virtualbox" do |vb|
       vb.cpus = 1
       vb.memory = 1024
-      vb.name = "SandboxMaster"
+      vb.name = "sandboxmaster"
     end
-    master.vm.provision "last", type: "shell", path: "prepare_master.sh"
+    master.vm.provision "last", type: "shell", path: "scripts/prepare_master.sh"
+    master.vm.provision "install_mitogen.sh", type: "shell", path: "scripts/install_mitogen.sh"
+    master.vm.provision "set_ansible_permissions.sh", type: "shell", path: "scripts/set_ansible_permissions.sh"
     master.vm.network "public_network", ip: "192.168.0.190"
   end
 
@@ -44,4 +46,8 @@ Vagrant.configure("2") do |config|
     agent.vm.network "public_network", ip: "192.168.0.192"
   end
 
+  config.trigger.before :destroy do |trigger|
+    trigger.run_remote = {inline: "rm -f /sandbox/keys/$(hostname).pub;rm -f /sandbox/keys/$(hostname)"}
+    trigger.on_error = :continue
+  end
 end
